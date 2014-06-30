@@ -1,28 +1,28 @@
-__author__ = 'andrew'
+from pages import Homepage, RecordingsPage
+
+__author__ = 'andrew wilson'
+
+import unittest
+import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
-from selenium.webdriver.support.ui import WebDriverWait
-import UploadUtil
+
 import Login_Util
-from Homepage import Homepage
-from ScheduleUtil import schedule_single
+from utils.ScheduleUtil import schedule_single
 import DateUtil
-import conf
-import RecordingsPage
+import GetConf
+
 
 series_name = "Series #1"
-file_path = "/home/andrew/Documents/matterhorn/tests/resources/nyan.mp4"
+file_path = "/home/andrew wilson/Documents/matterhorn/tests/resources/nyan.mp4"
 home = Homepage()
 durationhour = "0"
 durationmin = "1"
-captureagent = conf.get_ca("allinone")
-engageurl = conf.get_engageurl("allinone")
+captureagent = GetConf.get_ca("allinone")
+engageurl = GetConf.get_engageurl("allinone")
 
 
 
@@ -30,7 +30,7 @@ class AuthTests(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = conf.get_url("allinone")
+        self.base_url = GetConf.get_url("allinone")
         self.verificationErrors = []
         self.accept_next_alert = True
 

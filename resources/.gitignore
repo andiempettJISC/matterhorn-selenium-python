@@ -1,0 +1,4 @@
+# Directory of resources for selenium tests. to be ignored by git as media files such as avi's may be large or contain copyrighted material
+*
+# do not ignore this file
+!.gitignore

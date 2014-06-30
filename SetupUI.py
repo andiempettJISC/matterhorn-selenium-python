@@ -1,42 +1,43 @@
-__author__ = 'andrew'
-
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
-from selenium.webdriver.support.ui import WebDriverWait
-import UploadUtil
-import Login_Util
-from Homepage import Homepage
-import SeriesUtil
-import conf
-import DateUtil
-import ScheduleUtil
-import RecordingsPage
+import unittest
+import time
+
+from pages import Homepage
+from pages import RecordingsPage
+from utils import SeriesUtil
+from utils import ScheduleUtil
+from utils import LoginUtil
+from utils import DateUtil
+from utils import UploadUtil
+import GetConf
+
+
+__author__ = 'andrew wilson'
+
 
 series_pref = "Series #"
-file_path = "/home/andrew/Documents/matterhorn/tests/nyan.mp4"
-home = Homepage()
+file_path = "/resources/" + GetConf.get_video()
+home = Homepage.Homepage()
 durationhour = "0"
 durationmin = "1"
-captureagent = conf.get_ca("cluster")
-engageurl = conf.get_engageurl("cluster")
+captureagent = GetConf.get_ca()
+engageurl = GetConf.get_engageurl()
 
 class SetupUI(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(30)
-        self.base_url = conf.get_url("cluster")
+        self.base_url = GetConf.get_url()
         self.verificationErrors = []
         self.accept_next_alert = True
 
 
     def test_multiple_series(self):
         driver = self.driver
-        Login_Util.login_as_admin(driver, self.base_url)
+        LoginUtil.login_as_admin(driver, self.base_url)
         self.assertEqual(self.base_url + "/welcome.html", driver.current_url)
         home.clickadminlink(driver)
         for s in range(1, 15):
@@ -54,7 +55,7 @@ class SetupUI(unittest.TestCase):
 
     def test_upload_two_recs(self): #rec_name, series_name, file_name
         driver = self.driver
-        Login_Util.login_as_admin(driver, self.base_url)
+        LoginUtil.login_as_admin(driver, self.base_url)
         self.assertEqual(self.base_url + "/welcome.html", driver.current_url)
         home.clickadminlink(driver)
         title_series = {"Anonymous Recording": "", "Series 1 Recording": "Series #1"}
@@ -66,7 +67,7 @@ class SetupUI(unittest.TestCase):
 
     def test_schedule_recs(self):
         driver = self.driver
-        Login_Util.login_as_admin(driver, self.base_url)
+        LoginUtil.login_as_admin(driver, self.base_url)
         self.assertEqual(self.base_url + "/welcome.html", driver.current_url)
         home.clickadminlink(driver)
         starthour = int(DateUtil.gethour()) + 4
@@ -82,7 +83,7 @@ class SetupUI(unittest.TestCase):
     def test_schedule_multiple_recs(self):
         # FIXME so this only goes up to 30 recs or fails because the mins just get increased by 2. do somthing better with times
         driver = self.driver
-        Login_Util.login_as_admin(driver, self.base_url)
+        LoginUtil.login_as_admin(driver, self.base_url)
         self.assertEqual(self.base_url + "/welcome.html", driver.current_url)
         home.clickadminlink(driver)
         startmin = 0.0

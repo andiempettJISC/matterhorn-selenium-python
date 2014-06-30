@@ -1,20 +1,10 @@
-__author__ = 'andrew'
+__author__ = 'andrew wilson'
 
-from selenium import webdriver
+import time
+
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
-from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import NoAlertPresentException
-import unittest, time, re
-from selenium.webdriver.support.ui import WebDriverWait
-import UploadUtil
-import Login_Util
-from Homepage import Homepage
-from ScheduleUtil import schedule_single
-import DateUtil
-import conf
-import ScheduleUtil
+
 
 rec_table = {"sortTitle": "//table[@id='recordingsTable']/tbody/tr{}/td[2]",
              "sortPresenter": "//table[@id='recordingsTable']/tbody/tr{}/td[3]",

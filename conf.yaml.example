@@ -1,0 +1,31 @@
+# YAML
+
+# matterhorn instance web admin username and password
+admin:
+    username: admin
+    password: password
+
+student1:
+    username: student1
+    password: password
+
+student2:
+    username: student2
+    password: password
+
+instructor1:
+    username: instructor1
+    password: password
+
+instructor2:
+    username: instructor2
+    password: password
+
+# urls and ports for matterhorn instance, engage and capture agent
+matterhorn-server:
+    url: http://webaddress:port
+    engage: http://webaddress:port/engage/ui/index.html
+    capture-agent: captureagent.xx.xx
+
+# filename for video file in /resources
+video-file: video.mp4
